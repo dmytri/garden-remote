@@ -1,0 +1,4 @@
+kind: Module
+type: container
+name: remote
+image: nginx
