@@ -2,3 +2,18 @@ kind: Module
 type: container
 name: remote
 image: nginx
+services:
+  - name: home
+    replicas: 1
+    volumes:
+      - name: volume-home
+        containerPath: /usr/share/nginx/html/sites
+    ports:
+      - name: http
+        containerPort: 80
+        servicePort: 80
+    ingresses:
+      - path: /
+        port: http
+        #hostname: home.${environment.namespace}.192.168.39.104.nip.io
+        hostname: ${environment.namespace}.${providers.local-kubernetes.outputs.default-hostname}
