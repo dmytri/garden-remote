@@ -17,3 +17,9 @@ services:
         port: http
         #hostname: home.${environment.namespace}.192.168.39.104.nip.io
         hostname: ${environment.namespace}.${providers.local-kubernetes.outputs.default-hostname}
+tasks:
+  - name: bump-remote
+    command: [/bin/sh, -c]
+    args:
+      - >-
+        echo ${git.branch}
