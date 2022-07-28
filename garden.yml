@@ -2,6 +2,12 @@ kind: Module
 type: container
 name: remote
 image: nginx
+variables:
+  taskEnv:
+    GIT_BRANCH:
+      secretRef:
+        name: garden-bump
+        key: wip-branch
 services:
   - name: home
     replicas: 1
@@ -15,11 +21,4 @@ services:
     ingresses:
       - path: /
         port: http
-        #hostname: home.${environment.namespace}.192.168.39.104.nip.io
-        hostname: ${environment.namespace}.${providers.local-kubernetes.outputs.default-hostname}
-tasks:
-  - name: bump-remote
-    command: [/bin/sh, -c]
-    args:
-      - >-
-        echo ${git.branch}
+        hostname: ${environment.namespace}.${var.baseHostname}
