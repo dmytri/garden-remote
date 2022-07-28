@@ -3,11 +3,8 @@ type: container
 name: remote
 image: nginx
 variables:
-  taskEnv:
-    GIT_BRANCH:
-      secretRef:
-        name: garden-bump
-        key: wip-branch
+  baseHostname: "${providers.local-kubernetes ? providers.local-kubernetes.outputs.default-hostname : 'kubecon.demo.garden'}"
+
 services:
   - name: home
     replicas: 1
