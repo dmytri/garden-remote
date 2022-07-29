@@ -3,19 +3,15 @@ type: container
 name: remote
 variables:
   baseHostname: "${providers.local-kubernetes ? providers.local-kubernetes.outputs.default-hostname : 'kubecon.demo.garden'}"
-
 services:
   - name: home
     replicas: 1
     devMode:
       sync:
         - target: /usr/share/nginx/html/
-          source: src
+          source: src/
           mode: one-way-replica
-          defaultFileMode: 0744
-    volumes:
-      - name: volume-home
-        containerPath: /usr/share/nginx/html
+          defaultFileMode: 0644
     ports:
       - name: http
         containerPort: 8080
