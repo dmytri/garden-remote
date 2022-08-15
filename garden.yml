@@ -10,8 +10,8 @@ services:
       sync:
         - target: /usr/share/nginx/html/
           source: src/
-          mode: one-way-replica
-          defaultFileMode: 0644
+          #mode: one-way-replica
+          #defaultFileMode: 0644
     ports:
       - name: http
         containerPort: 8080
